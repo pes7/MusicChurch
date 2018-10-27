@@ -1,0 +1,35 @@
+Create Table Users (
+id smallint AUTO_INCREMENT not null primary key,
+name varchar(32),
+surname varchar(32),
+username varchar(32),
+password int,
+email char(32),
+isAdmin int,
+authKey varchar(32),
+accessKey varchar(32)
+);
+
+Create Table Partitura (
+id smallint AUTO_INCREMENT not null primary key,
+caption varchar(32)
+);
+
+Create Table News(
+id smallint AUTO_INCREMENT not null primary key,
+caption varchar(32),
+text varchar(255)
+);
+
+Create Table Gallery(
+id smallint AUTO_INCREMENT not null primary key,
+caption varchar(32)
+);
+Create Table media(
+id smallint not null primary key AUTO_INCREMENT ,
+referenceIdPartitura smallint,
+referenceIdNews smallint,
+referenceIdGallery smallint,
+caption varchar(32),
+src varchar(32)
+);
