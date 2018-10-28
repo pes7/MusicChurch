@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Час створення: Жов 27 2018 р., 21:06
+-- Час створення: Жов 28 2018 р., 23:04
 -- Версія сервера: 10.1.36-MariaDB
 -- Версія PHP: 7.2.11
 
@@ -65,16 +65,18 @@ CREATE TABLE `media` (
   `referenceIdNews` smallint(6) DEFAULT NULL,
   `referenceIdGallery` smallint(6) DEFAULT NULL,
   `caption` varchar(32) DEFAULT NULL,
-  `src` varchar(32) DEFAULT NULL
+  `src` varchar(64) CHARACTER SET cp1251 COLLATE cp1251_ukrainian_ci DEFAULT NULL,
+  `con` varbinary(2048) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Дамп даних таблиці `media`
 --
 
-INSERT INTO `media` (`id`, `referenceIdPartitura`, `referenceIdNews`, `referenceIdGallery`, `caption`, `src`) VALUES
-(1, 1, NULL, NULL, NULL, 'some src pdf'),
-(2, 1, NULL, NULL, NULL, 'src to mp3');
+INSERT INTO `media` (`id`, `referenceIdPartitura`, `referenceIdNews`, `referenceIdGallery`, `caption`, `src`, `con`) VALUES
+(1, 1, NULL, NULL, NULL, 'some src pdf', NULL),
+(2, 1, NULL, NULL, NULL, 'src to mp3', NULL),
+(5, 1, 2, 24, 'fwavfawv', '/media/IMG_20180925_230214_106.jpg', 0x494d475f32303138303932355f3233303231345f3130362e6a7067);
 
 -- --------------------------------------------------------
 
@@ -84,9 +86,20 @@ INSERT INTO `media` (`id`, `referenceIdPartitura`, `referenceIdNews`, `reference
 
 CREATE TABLE `news` (
   `id` smallint(6) NOT NULL,
-  `caption` varchar(32) DEFAULT NULL,
-  `text` varchar(255) DEFAULT NULL
+  `caption` varchar(32) CHARACTER SET cp1251 COLLATE cp1251_ukrainian_ci DEFAULT NULL,
+  `text` varchar(255) CHARACTER SET cp1251 COLLATE cp1251_ukrainian_ci DEFAULT NULL,
+  `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Дамп даних таблиці `news`
+--
+
+INSERT INTO `news` (`id`, `caption`, `text`, `date`) VALUES
+(2, 'Новий виступ хору', 'Новий виступ хору в Новосілках вразив всіх своєю майстерністю та акопониментом. Спеціальна підбірка пісень прямо в статті', '2018-10-28'),
+(3, 'Тестова Новина', 'ну що тут сказати, тест є - тест', '2018-10-27'),
+(4, 'А це ще один тест', 'Ідеї уже повністю закінчились, надіюсь хтось придумає реально цікаві новини)', '2018-10-28'),
+(5, 'Ще одна стаття', 'Да куди уже більше, воне же не влізе, до того ж з майбутнього', '2018-10-29');
 
 -- --------------------------------------------------------
 
@@ -198,13 +211,13 @@ ALTER TABLE `gallery`
 -- AUTO_INCREMENT для таблиці `media`
 --
 ALTER TABLE `media`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблиці `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` smallint(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблиці `partitura`
