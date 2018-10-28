@@ -9,6 +9,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\UploadedFile;
 
 class SiteController extends Controller
 {
@@ -61,12 +62,14 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        $news = \app\models\News::find()->limit(3)->orderBy('date DESC')->all();
         $bible = \app\models\Bible::find()->limit(1)->orderBy('rand')->select('*, rand() as rand')->all();
         return $this->render('index',[
-            'bible'=>$bible
+            'bible'=>$bible,
+            'news'=>$news
         ]);
     }
-
+    
     /**
      * Login action.
      *
@@ -148,6 +151,22 @@ class SiteController extends Controller
                 return $this->render('UserW', [
                     'model' => $model,
                     'addition' => null
+                ]);
+            case "createNewMedia":
+                /*Что то не робит*/
+                $model = new \app\models\Media();
+                if ($model->load(Yii::$app->request->post())) {
+                    $model->con = UploadedFile::getInstance($model, 'con');
+                    if ($model->upload()) {
+                        $this->render('MediaW', [
+                            'model' => $model,
+                            'succes'=>'true'
+                        ]);
+                    }
+                }
+                return $this->render('MediaW', [
+                    'model' => $model,
+                    'succes'=>'nautral'
                 ]);
             case "showAllUsers":
                 $page = Yii::$app->request->getQueryParam("p")!=null ? Yii::$app->request->getQueryParam("p") : 0;

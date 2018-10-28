@@ -12,7 +12,7 @@ echo($partitura[0]->caption);
 echo("<br>Files: ");
 $i = 1;
 foreach($media as $md){
-    echo("$i)$md->src ");
+    echo("<img src='http://localhost/test$md->src' height='42' width='42'/> $i)$md->src");
     $i++;
 }
 }
