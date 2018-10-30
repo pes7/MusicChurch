@@ -20,6 +20,9 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="row">
                         <p><a class="btn btn-default" href="?action=showAllUsers">Show All Users</a></p>
                     </div>
+                    <div class="row">
+                        <p><a class="btn btn-default" href="?action=createNewMedia">Add media</a></p>
+                    </div>
                 </td>
             </tr>
         </table>

@@ -17,8 +17,8 @@ function cutText($text,$i) : string{
         <h1>Congratulations!</h1>
 
         <p class="lead"><?php
-            $text = $bible[0]->text;
-            $url = $bible[0]->url;
+            $text = $bible->text;
+            $url = $bible->url;
             echo("$text ($url)");
         ?></p>
 

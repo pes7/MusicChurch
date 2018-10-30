@@ -65,7 +65,7 @@ class SiteController extends Controller
         $news = \app\models\News::find()->limit(3)->orderBy('date DESC')->all();
         $bible = \app\models\Bible::find()->limit(1)->orderBy('rand')->select('*, rand() as rand')->all();
         return $this->render('index',[
-            'bible'=>$bible,
+            'bible'=>$bible[0],
             'news'=>$news
         ]);
     }
